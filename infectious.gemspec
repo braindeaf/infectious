@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = Infectious::VERSION
   s.authors     = ["Rob Lacey"]
   s.email       = ["contact@robl.me"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Infectious."
-  s.description = "TODO: Description of Infectious."
+  s.homepage    = "http://robl.me/gems/infectious"
+  s.summary     = "Authorizations Engine"
+  s.description = "Rails Engine for linking Social Network / Third-Party (O)Authorizations"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
