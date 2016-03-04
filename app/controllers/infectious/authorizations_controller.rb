@@ -8,7 +8,7 @@ module Infectious
 
     def callback
       json = AychTTP.post('https://accounts.spotify.com/api/token', code: params[:code], client_id: settings['client_id'], client_secret: settings['client_secret'], redirect_uri: callback_url, grant_type: 'authorization_code')
-      Authorization.create(provider: 'spotify', data: json.parsed_body, access_token: json.parsed_body['access_token'])
+      Infectious::Authorization.create(provider: 'spotify', data: json.parsed_body, access_token: json.parsed_body['access_token'])
       render text: json.parsed_body.to_yaml
     end
 
