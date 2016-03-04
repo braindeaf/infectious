@@ -12,7 +12,7 @@ module Infectious
     private
 
     def callback_url
-      callback_spotify_url
+      send [params[:type], :callback_url].join('_')
     end
 
     def service_module
