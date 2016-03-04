@@ -1,7 +1,9 @@
 module Infectious
   class AuthorizationsController < Infectious::ApplicationController
     def new
-      redirect_to "https://accounts.spotify.com/en/authorize?client_id=#{settings['client_id']}&redirect_uri=#{callback_url}&response_type=code"
+      redirect_to uri_for(
+        protocol: 'https', host: 'accounts.spotify.com', path: '/en/authorize', client_id: settings['client_id'], redirect_uri: callback_url, response_type: 'code'
+      )
     end
 
     def callback
@@ -22,6 +24,22 @@ module Infectious
 
     def service_module
       params[:type].camelize
+    end
+
+    def uri_for(args)
+      host, port, path = [args.delete(:host), args.delete(:port), args.delete(:path)]
+      builder = args.delete(:protocol) == 'https' ? URI::HTTPS : URI::HTTP
+
+      if host.nil?
+        host =   Site.config.host
+        port ||= Site.config.port
+      end
+
+      uri = builder.build host: host, port: port, path: path
+      unless args.empty?
+        uri.query = args.reject { |_k, v| v.nil? }.sort_by { |k, _v| k.to_s }.map { |k, v| "#{k}=#{v.to_s}" }.join('&')
+      end
+      uri.to_s
     end
   end
 end
