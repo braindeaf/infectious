@@ -1,5 +1,5 @@
 module Infectious
-  class Authorizations < ApplicationRecord
+  class Authorization < ApplicationRecord
     serialize :data, Hash
   end
 end
