@@ -5,8 +5,8 @@ module Infectious
     end
 
     def callback
-      body = JSON.parse(Faraday.new(url: 'https://accounts.spotify.com').post('/api/token', code: params[:code], redirect_uri: callback_url, grant_type: 'authorization_code').body)
-      render text: body.to_yaml
+      json = AychTTP.post('https://accounts.spotify.com/api/token', code: params[:code], redirect_uri: callback_url, grant_type: 'authorization_code')
+      render text: json.to_yaml
     end
 
     private
