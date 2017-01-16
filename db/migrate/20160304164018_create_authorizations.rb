@@ -1,4 +1,4 @@
-class CreateAuthorizations < ActiveRecord::Migration[5.0]
+class CreateAuthorizations < ActiveRecord::Migration
   def up
     create_table :infectious_authorizations do |t|
       t.string :provider
