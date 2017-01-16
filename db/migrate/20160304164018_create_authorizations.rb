@@ -1,4 +1,4 @@
-class CreateAuthorizations < ActiveRecord::Migration
+class CreateInfectiousAuthorizations < ActiveRecord::Migration
   def up
     create_table :infectious_authorizations do |t|
       t.string :provider
@@ -8,6 +8,6 @@ class CreateAuthorizations < ActiveRecord::Migration
     end
   end
   def down
-    drop_table :authorizations
+    drop_table :infectious_authorizations
   end
 end
