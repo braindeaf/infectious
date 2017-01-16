@@ -10,7 +10,7 @@ module Infectious
       end
 
       def verify!(callback_url, params)
-        json = post('oauth/access_token', code: params[:code], redirect_uri: callback_url, grant_type: 'authorization_code')
+        json = post('/oauth/access_token', code: params[:code], redirect_uri: callback_url, grant_type: 'authorization_code')
         Infectious::Authorization.create(provider: 'instagram', data: json.parsed_body, access_token: json.parsed_body['access_token'])
       end
 
