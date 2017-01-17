@@ -2,9 +2,9 @@ module Infectious
   class SubscriptionsController < ApplicationController
     def callback
       if params['hub.challenge']
-        render text: params['hub.challenge'], status: 200
+        render plain: params['hub.challenge'], status: 200
       else
-        render status: 400
+        render plain: '', status: 400
       end
     end
   end
