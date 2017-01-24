@@ -1,4 +1,4 @@
-class CreateInfectiousSubscriptions < ActiveRecord::Migration[5.0]
+class CreateInfectiousSubscriptions < ActiveRecord::Migration
   def change
     create_table :infectious_subscriptions do |t|
       t.string :provider

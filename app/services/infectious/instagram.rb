@@ -5,6 +5,7 @@ module Infectious
         AychTTP.uri_for(
           protocol: 'https', host: 'api.instagram.com', 
           path: '/oauth/authorize', client_id: settings['client_id'], 
+          scope: 'public_content',
           redirect_uri: callback_url, response_type: 'code'
         )
       end
