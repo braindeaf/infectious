@@ -1,0 +1,8 @@
+%table
+  %tr
+    %th Provider
+    %th Token
+  - @authorizations.each do |authorization|
+    %tr
+      %td= authorization.provider
+      %td= authorization.access_token

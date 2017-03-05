@@ -11,13 +11,14 @@ module Infectious
       end
 
       def verify!(callback_url, params)
-        json = post('/oauth/access_token', code: params[:code], redirect_uri: callback_url, grant_type: 'authorization_code')
+        uri = AychTTP.uri_for(protocol: 'https', host: 'graph.facebook.com', path: '/v2.8/oauth/access_token')
+        json = AychTTP.get(uri, client_params.merge(redirect_uri: callback_url, code: params[:code]))
         Infectious::Authorization.create(provider: 'facebook', data: json.parsed_body, access_token: json.parsed_body['access_token'])
       end
 
-      def subscribe(callback_url, verify_token)
-        post('/v1/subscriptions', object: 'user', aspect: 'media', verify_token: verify_token, callback_url: callback_url)
-      end
+      # def subscribe(callback_url, verify_token)
+      #   post('/v1/subscriptions', object: 'user', aspect: 'media', verify_token: verify_token, callback_url: callback_url)
+      # end
 
       def settings
         @settings ||= YAML.load_file Rails.root.join('config', 'settings', 'facebook.yml')
@@ -26,13 +27,13 @@ module Infectious
       private
 
       def post(path, params = {})
-        AychTTP.post("https://api.instagram.com#{path}", client_params.merge(params))
+        AychTTP.post(path, client_params.merge(params))
       end
 
       def client_params
         { 
-          client_id: settings['client_id'], 
-          client_secret: settings['client_secret'] 
+          client_id: settings['app_id'],
+          client_secret: settings['app_secret'] 
         }
       end
     end
