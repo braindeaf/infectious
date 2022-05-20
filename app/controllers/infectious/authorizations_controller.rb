@@ -13,6 +13,11 @@ module Infectious
       redirect_to action: :index
     end
 
+    def refresh
+      Infectious::Authorization.find(params[:id]).refresh!
+      redirect_to action: :index
+    end
+
     private
 
     def callback_url

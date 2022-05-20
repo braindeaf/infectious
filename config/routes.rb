@@ -1,5 +1,9 @@
 Infectious::Engine.routes.draw do
-  get '/authorizations' => 'authorizations#index'
+  resources :authorizations, only: :index do
+    member do
+      get '/refresh', to: :refresh
+    end
+  end
   %w(spotify facebook twitter instagram).each do |type|
     get "/#{type}" => 'authorizations#new', defaults: { type: type }
     get "/#{type}/callback" => 'authorizations#callback', defaults: { type: type }

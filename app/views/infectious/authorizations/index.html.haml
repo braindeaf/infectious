@@ -9,4 +9,7 @@
       %td
         %code
           %pre= authorization.access_token
-      %td= authorization.expires_at && l(authorization.expires_at)
+      %td
+        - if authorization.expires_at
+          = l(authorization.expires_at)
+        = link_to 'Refresh Token', refresh_authorization_path(authorization)
