@@ -2,7 +2,7 @@
 Infectious::Engine.routes.draw do
   resources :authorizations, only: :index do
     member do
-      get '/refresh', to: :refresh
+      get '/refresh', action: :refresh
     end
   end
   %w(spotify facebook twitter instagram).each do |type|
