@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateInfectiousAuthorizations < ActiveRecord::Migration
   def up
     create_table :infectious_authorizations do |t|

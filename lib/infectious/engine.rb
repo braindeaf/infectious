@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Infectious
   class Engine < ::Rails::Engine
     isolate_namespace Infectious

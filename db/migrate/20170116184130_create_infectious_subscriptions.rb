@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateInfectiousSubscriptions < ActiveRecord::Migration
   def change
     create_table :infectious_subscriptions do |t|

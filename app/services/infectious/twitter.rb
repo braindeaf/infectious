@@ -1,22 +1,26 @@
+# frozen_string_literal: true
 module Infectious
   module Twitter
     module Methods
       def authorize_url(callback_url)
         AychTTP.uri_for(
-          protocol: 'https', host: 'api.instagram.com', 
-          path: '/oauth/authorize', client_id: settings['client_id'], 
+          protocol: 'https', host: 'api.instagram.com',
+          path: '/oauth/authorize', client_id: settings['client_id'],
           scope: 'public_content',
           redirect_uri: callback_url, response_type: 'code'
         )
       end
 
       def verify!(callback_url, params)
-        json = post('/oauth/access_token', code: params[:code], redirect_uri: callback_url, grant_type: 'authorization_code')
-        Infectious::Authorization.create(provider: 'instagram', data: json.parsed_body, access_token: json.parsed_body['access_token'])
+        json = post('/oauth/access_token', code: params[:code], redirect_uri: callback_url,
+                                           grant_type: 'authorization_code')
+        Infectious::Authorization.create(provider: 'instagram', data: json.parsed_body,
+                                         access_token: json.parsed_body['access_token'])
       end
 
       def subscribe(callback_url, verify_token)
-        post('/v1/subscriptions', object: 'user', aspect: 'media', verify_token: verify_token, callback_url: callback_url)
+        post('/v1/subscriptions', object: 'user', aspect: 'media', verify_token: verify_token,
+                                  callback_url: callback_url)
       end
 
       def settings
@@ -30,14 +34,14 @@ module Infectious
       end
 
       def client_params
-        { 
-          client_id: settings['client_id'], 
-          client_secret: settings['client_secret'] 
+        {
+          client_id: settings['client_id'],
+          client_secret: settings['client_secret']
         }
       end
     end
     extend Methods
-    
+
     class API
 
       attr_accessor :authorization

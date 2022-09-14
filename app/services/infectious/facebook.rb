@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 module Infectious
   module Facebook
     module Methods
       def authorize_url(callback_url)
         AychTTP.uri_for(
-          protocol: 'https', host: 'www.facebook.com', 
-          path: '/v2.8/dialog/oauth', app_id: settings['app_id'], 
+          protocol: 'https', host: 'www.facebook.com',
+          path: '/v2.8/dialog/oauth', app_id: settings['app_id'],
           scope: 'manage_pages,publish_pages,publish_actions',
           redirect_uri: callback_url, response_type: 'code'
         )
@@ -13,7 +14,8 @@ module Infectious
       def verify!(callback_url, params)
         uri = AychTTP.uri_for(protocol: 'https', host: 'graph.facebook.com', path: '/v2.8/oauth/access_token')
         json = AychTTP.get(uri, client_params.merge(redirect_uri: callback_url, code: params[:code]))
-        Infectious::Authorization.create(provider: 'facebook', data: json.parsed_body, access_token: json.parsed_body['access_token'])
+        Infectious::Authorization.create(provider: 'facebook', data: json.parsed_body,
+                                         access_token: json.parsed_body['access_token'])
       end
 
       # def subscribe(callback_url, verify_token)
@@ -31,14 +33,14 @@ module Infectious
       end
 
       def client_params
-        { 
+        {
           client_id: settings['app_id'],
-          client_secret: settings['app_secret'] 
+          client_secret: settings['app_secret']
         }
       end
     end
     extend Methods
-    
+
     class API
 
       attr_accessor :authorization

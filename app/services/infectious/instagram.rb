@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Infectious
   module Instagram
     module Methods
@@ -22,7 +23,8 @@ module Infectious
       end
 
       def subscribe(callback_url, verify_token)
-        post('/v1/subscriptions', object: 'user', aspect: 'media', verify_token: verify_token, callback_url: callback_url)
+        post('/v1/subscriptions', object: 'user', aspect: 'media', verify_token: verify_token,
+                                  callback_url: callback_url)
       end
 
       def settings

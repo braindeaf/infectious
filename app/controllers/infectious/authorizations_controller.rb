@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Infectious
   class AuthorizationsController < Infectious::ApplicationController
     def index
